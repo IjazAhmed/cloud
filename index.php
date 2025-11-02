@@ -17,7 +17,7 @@
         
         <form action="signup.php" method="post" id="signupForm">
             <div class="form-group">
-                <label>Full Name</label>
+                <label>First Name</label>
                 <input type="text" name="name" id="name" placeholder="Enter your full name">
                 <span class="error" id="name-error"></span>
             </div>
