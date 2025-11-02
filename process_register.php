@@ -4,7 +4,7 @@ $serverName = "tcp:mycardiffmet.database.windows.net,1433";
 $connectionOptions = array(
     "Database" => "myDatabase",
     "Uid" => "myadmin", 
-    "PWD" => "Abcdefgh0!",
+    "PWD" => "abcdefgh0!",
     "Encrypt" => 1,
     "TrustServerCertificate" => 0
 );
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             
             // Insert into database
-            $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
             $params = array($name, $email, $hashed_password);
             $stmt = sqlsrv_query($conn, $sql, $params);
             
@@ -34,15 +34,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: success.php");
                 exit();
             } else {
-                // Redirect back with error
-                header("Location: register.html?error=Database+error+please+try+again");
+                // Get detailed error information
+                $errors = sqlsrv_errors();
+                $error_message = "Database error: ";
+                if ($errors != null) {
+                    foreach ($errors as $error) {
+                        $error_message .= "SQLSTATE: " . $error['SQLSTATE'] . ", ";
+                        $error_message .= "Code: " . $error['code'] . ", ";
+                        $error_message .= "Message: " . $error['message'];
+                    }
+                }
+                // Redirect back with detailed error
+                header("Location: register.html?error=" . urlencode($error_message));
                 exit();
             }
             
             sqlsrv_free_stmt($stmt);
             sqlsrv_close($conn);
         } else {
-            header("Location: register.html?error=Database+connection+failed");
+            $connection_errors = sqlsrv_errors();
+            $conn_error_message = "Database connection failed: ";
+            if ($connection_errors != null) {
+                foreach ($connection_errors as $error) {
+                    $conn_error_message .= $error['message'];
+                }
+            }
+            header("Location: register.html?error=" . urlencode($conn_error_message));
             exit();
         }
     } else {
