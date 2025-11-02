@@ -62,6 +62,15 @@
         .btn:hover {
             background-color: #0056b3;
         }
+        .error {
+            color: red;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +81,13 @@
 
     <div class="register-form">
         <h2>Register</h2>
+        
+        <!-- Display error message if present -->
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
         
         <!-- Form submits to process_register.php -->
         <form method="post" action="process_register.php">
