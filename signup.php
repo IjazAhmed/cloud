@@ -112,7 +112,7 @@ if ($_POST) {
 </head>
 <body>
     <div class="signup-form">
-        <h2>Simple Sign Up</h2>
+        <h2>Simple Sign Upp</h2>
         
         <?php if (isset($message)): ?>
             <div class="message <?php echo strpos($message, 'successfully') !== false ? 'success' : 'error'; ?>">
