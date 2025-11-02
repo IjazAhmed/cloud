@@ -46,7 +46,7 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Sign Up</title>
+    <title>Simple Sign Up</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -112,7 +112,7 @@ if ($_POST) {
 </head>
 <body>
     <div class="signup-form">
-        <h2>My Simple Sign Up</h2>
+        <h2>Simple Sign Up</h2>
         
         <?php if (isset($message)): ?>
             <div class="message <?php echo strpos($message, 'successfully') !== false ? 'success' : 'error'; ?>">
