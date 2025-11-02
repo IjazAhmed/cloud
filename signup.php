@@ -36,7 +36,7 @@ if ($_POST) {
         sqlsrv_free_stmt($stmt);
         sqlsrv_close($conn);
     } else {
-        $message = "Could not connect to database";
+        $message = "Could not connect to database. pls check your connection option";
     }
 }
 ?>
