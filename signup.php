@@ -9,7 +9,7 @@ $name = $email = $password = $confirm_password = "";
 $name_err = $email_err = $password_err = $confirm_password_err = "";
 $success_message = "";
 
-echo "hi"
+
 
 // Process form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
