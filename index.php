@@ -3,51 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>MyShop - Welcome</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .signup-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .signup-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div class="signup-form">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
-        
-        <div id="message-container">
-            <!-- Messages will be displayed here by JavaScript -->
+    <div class="header">
+        <div class="container">
+            <h1>MyShop</h1>
+            <p>Your one-stop destination for amazing products</p>
         </div>
-        
-        <form action="signup.php" method="post" id="signupForm">
-            <div class="form-group">
-                <label>First Name</label>
-                <input type="text" name="name" id="name" placeholder="Enter your full name">
-                <span class="error" id="name-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" id="email" placeholder="Enter your email">
-                <span class="error" id="email-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password">
-                <span class="error" id="password-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password">
-                <span class="error" id="confirm-password-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" class="btn" value="Submit">
-            </div>
-            
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
-        </form>
     </div>
 
-    <script src="script.js"></script>
+    <div class="container">
+        <div class="welcome-text">
+            <h2>Welcome to MyShop</h2>
+            <p>Join our community today to access exclusive deals and features!</p>
+            
+            <!-- Simple link to signup page -->
+            <a href="signup_form.html" class="signup-link">Create Account</a>
+        </div>
+    </div>
 </body>
 </html>
