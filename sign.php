@@ -4,7 +4,7 @@ $serverName = "tcp:mycardiffmet.database.windows.net,1433";
 $connectionOptions = array(
     "Database" => "myDatabase",
     "Uid" => "myadmin", 
-    "PWD" => "abcdefgh0!",
+    "PWD" => "Abcdefgh0!",
     "Encrypt" => 1,
     "TrustServerCertificate" => 0
 );
@@ -23,7 +23,7 @@ if ($_POST) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
         // Insert into database
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
         $params = array($name, $email, $hashed_password);
         $stmt = sqlsrv_query($conn, $sql, $params);
         
