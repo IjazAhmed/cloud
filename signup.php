@@ -23,7 +23,7 @@ if ($_POST) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
         // Insert into database
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
         $params = array($name, $email, $hashed_password);
         $stmt = sqlsrv_query($conn, $sql, $params);
         
