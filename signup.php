@@ -11,32 +11,60 @@ $connectionOptions = array(
 
 // Process form submission
 if ($_POST) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
     
-    // Connect to database
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
+    // Simple field validation
+    $errors = [];
     
-    if ($conn) {
-        // Hash password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    if (empty($name)) {
+        $errors[] = "Name is required";
+    }
+    
+    if (empty($email)) {
+        $errors[] = "Email is required";
+    }
+    
+    if (empty($password)) {
+        $errors[] = "Password is required";
+    }
+    
+    // If no errors, proceed with database insertion
+    if (empty($errors)) {
+        // Connect to database
+        $conn = sqlsrv_connect($serverName, $connectionOptions);
         
-        // Insert into database
-        $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
-        $params = array($name, $email, $hashed_password);
-        $stmt = sqlsrv_query($conn, $sql, $params);
-        
-        if ($stmt) {
-            $message = "User registered successfully!";
+        if ($conn) {
+            // Hash password
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            
+            // Insert into database
+            $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
+            $params = array($name, $email, $hashed_password);
+            $stmt = sqlsrv_query($conn, $sql, $params);
+            
+            if ($stmt) {
+                $message = "User registered successfully!";
+                $message_type = "success";
+                
+                // Clear form fields after successful submission
+                $name = $email = $password = "";
+            } else {
+                $message = "Error: " . print_r(sqlsrv_errors(), true);
+                $message_type = "error";
+            }
+            
+            sqlsrv_free_stmt($stmt);
+            sqlsrv_close($conn);
         } else {
-            $message = "Error: " . print_r(sqlsrv_errors(), true);
+            $message = "Could not connect to database";
+            $message_type = "error";
         }
-        
-        sqlsrv_free_stmt($stmt);
-        sqlsrv_close($conn);
     } else {
-        $message = "Could not connect to database";
+        // Show validation errors
+        $message = implode("<br>", $errors);
+        $message_type = "error";
     }
 }
 ?>
@@ -115,7 +143,7 @@ if ($_POST) {
         <h2>Simple Sign Up</h2>
         
         <?php if (isset($message)): ?>
-            <div class="message <?php echo strpos($message, 'successfully') !== false ? 'success' : 'error'; ?>">
+            <div class="message <?php echo $message_type; ?>">
                 <?php echo $message; ?>
             </div>
         <?php endif; ?>
@@ -123,17 +151,17 @@ if ($_POST) {
         <form method="post">
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" name="name" placeholder="Enter your name">
+                <input type="text" name="name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" placeholder="Enter your name">
             </div>
             
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Enter your email">
+                <input type="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" placeholder="Enter your email">
             </div>
             
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" placeholder="Enter your password">
+                <input type="password" name="password" value="<?php echo isset($password) ? htmlspecialchars($password) : ''; ?>" placeholder="Enter your password">
             </div>
             
             <div class="form-group">
