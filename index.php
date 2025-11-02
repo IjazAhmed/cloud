@@ -57,7 +57,7 @@
             <p>Join our community today to access exclusive deals and features!</p>
             
             <!-- Simple link to signup page -->
-            <a href="register.html" class="signup-link">Create Your Account</a>
+            <a href="register.php" class="signup-link">Create Your Account</a>
         </div>
     </div>
 </body>
