@@ -120,7 +120,7 @@ if ($_POST) {
             </div>
         <?php endif; ?>
         
-        <form method="post" action="/signup.php">
+        <form method="post" action="<?php echo parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); ?>">
             <div class="form-group">
                 <label>Full Name</label>
                 <input type="text" name="name" placeholder="Enter your name">
