@@ -120,7 +120,7 @@ if ($_POST) {
             </div>
         <?php endif; ?>
         
-        <form method="post">
+        <form method="post" action="/signup.php">
             <div class="form-group">
                 <label>Full Name</label>
                 <input type="text" name="name" placeholder="Enter your name">
