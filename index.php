@@ -1,11 +1,10 @@
 <?php
 // SQL Server configuration
-$serverName = "localhost";
-$connectionOptions = array(
-    "Database" => "your_database",
-    "Uid" => "your_username",
-    "PWD" => "your_password"
-);
+
+$connectionInfo = array("UID" => "myadmin", "pwd" => "Abcdefgh0!", "Database" => "myDatabase", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:mycardiffmet.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+
 
 // Initialize variables
 $name = $email = $password = $confirm_password = "";
