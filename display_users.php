@@ -172,8 +172,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         <?php endif; ?>
         
         <div>
-            <a href="register.html" class="btn">Register Another User</a>
-            <a href="display_users.php" class="btn btn-secondary">View Detailed Users Page</a>
+            <a href="index.php" class="btn">Home</a>
         </div>
     </div>
 
