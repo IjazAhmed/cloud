@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$serverName = "tcp:mycardiffmet-replicaa.database.windows.net,1433";
+$serverName = "tcp:mycardiffmet-replica.database.windows.net,1433";
 $connectionOptions = array(
     "Database" => "myDatabase",
     "Uid" => "myadmin", 
