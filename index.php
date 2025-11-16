@@ -59,6 +59,7 @@
             <!-- Simple link to signup page -->
             <a href="register.php" class="signup-link">Create Your Account</a>
             <a href="display_users.php" class="signup-link">View Registered Accounts</a>
+            <a href="add_users.php" class="signup-link">Randomly Add Users</a>
         </div>
     </div>
 </body>
