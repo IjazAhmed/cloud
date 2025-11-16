@@ -121,9 +121,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
 <body>
     <div class="success-message">
         <div class="success-icon">✓</div>
-        <h1>Registration Successful!</h1>
-        <p>Thank you for registering. Your account has been created successfully.</p>
-        
+        <h1>List of Registered Users</h1>
         <div class="user-count">
             Total Registered Users: <?php echo count($users); ?>
         </div>
