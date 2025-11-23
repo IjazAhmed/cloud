@@ -15,7 +15,7 @@ $connectionOptions = array(
 
 $serverName = "apptestdb.mysql.database.azure.com,3306";
 $connectionOptions = array(
-    "Database" => "myDatabase",
+    "Database" => "mydatabase",
     "Uid" => "AdminTest", 
     "PWD" => "Abcdefgh0!",
     "Encrypt" => 1,
