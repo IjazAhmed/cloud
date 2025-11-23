@@ -1,33 +1,35 @@
 <?php
-// Database connection
-$serverName = "tcp:mycardiffmet-replica.database.windows.net,1433";
-$connectionOptions = array(
-    "Database" => "myDatabase",
-    "Uid" => "myadmin", 
-    "PWD" => "Abcdefgh0!",
-    "Encrypt" => 1,
-    "TrustServerCertificate" => 0
-);
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Connect to database
-$conn = sqlsrv_connect($serverName, $connectionOptions);
+// Database configuration for Azure MySQL
+$host = "apptestdb.mysql.database.azure.com";
+$username = "AdminTest";
+$password = "Abcdefgh0!";
+$database = "mydatabase";
 
-if (!$conn) {
-    die("Connection failed: " . print_r(sqlsrv_errors(), true));
-}
+try {
+    // PDO connection with SSL for Azure MySQL
+    $dsn = "mysql:host=$host;port=3306;dbname=$database;charset=utf8";
+    $options = [
+        PDO::MYSQL_ATTR_SSL_CA => '/home/site/wwwroot/BaltimoreCyberTrustRoot.crt.pem',
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ];
+    
+    $conn = new PDO($dsn, $username, $password, $options);
+    
+    // Get ALL registered users
+    $sql = "SELECT name, email, password, created_at FROM shopusers ORDER BY created_at DESC";
+    $stmt = $conn->query($sql);
+    
+    // Fetch all users into an array
+    $users = $stmt->fetchAll();
 
-// Get ALL registered users
-$sql = "SELECT name, email, password, created_at FROM shopusers ORDER BY created_at DESC";
-$stmt = sqlsrv_query($conn, $sql);
-
-if ($stmt === false) {
-    die("Query failed: " . print_r(sqlsrv_errors(), true));
-}
-
-// Fetch all users into an array
-$users = array();
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $users[] = $row;
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 ?>
 
@@ -151,11 +153,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
                                 </td>
                                 <td>
                                     <?php 
-                                    if ($user['created_at'] instanceof DateTime) {
-                                        echo $user['created_at']->format('Y-m-d H:i:s');
-                                    } else {
-                                        echo htmlspecialchars($user['created_at']);
-                                    }
+                                    echo htmlspecialchars($user['created_at']);
                                     ?>
                                 </td>
                             </tr>
@@ -170,14 +168,13 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         <?php endif; ?>
         
         <div>
-            <a href="index.php" class="btn">Home</a>
+            <a href="register.html" class="btn">Register New User</a>
+            <a href="index.php" class="btn btn-secondary">Home</a>
         </div>
     </div>
 
     <?php
-    // Clean up
-    sqlsrv_free_stmt($stmt);
-    sqlsrv_close($conn);
+    // Clean up - PDO automatically closes connection
     ?>
 </body>
 </html>
