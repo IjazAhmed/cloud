@@ -23,7 +23,7 @@ try {
     $conn = new PDO($dsn, $username, $password, $options);
     
     echo "Connected to database successfully!<br>";
-    echo "Starting to add 100 sample users...<br>";
+    echo "Starting to add 10 sample users...<br>";
 
     $firstNames = ['John', 'Jane', 'Michael', 'Sarah', 'David', 'Lisa', 'Robert', 'Emily'];
     $lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
@@ -35,7 +35,7 @@ try {
     $sql = "INSERT INTO shopusers (name, email, password) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-    for ($i = 1; $i <= 100; $i++) {
+    for ($i = 1; $i <= 10; $i++) {
         $firstName = $firstNames[array_rand($firstNames)];
         $lastName = $lastNames[array_rand($lastNames)];
         $name = $firstName . ' ' . $lastName;
