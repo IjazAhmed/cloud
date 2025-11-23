@@ -1,5 +1,7 @@
 <?php
 // Simple database connection
+
+/** 
 $serverName = "tcp:mycardiffmet.database.windows.net,1433";
 $connectionOptions = array(
     "Database" => "myDatabase",
@@ -8,6 +10,19 @@ $connectionOptions = array(
     "Encrypt" => 1,
     "TrustServerCertificate" => 0
 );
+*/
+
+
+$serverName = "apptestdb.mysql.database.azure.com,3306";
+$connectionOptions = array(
+    "Database" => "myDatabase",
+    "Uid" => "AdminTest", 
+    "PWD" => "Abcdefgh0!",
+    "Encrypt" => 1,
+    "TrustServerCertificate" => 0
+);
+
+
 
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
